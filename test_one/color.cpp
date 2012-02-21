@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "color.h"
 
+Color::Color()
+{
+	Red_=0;
+	Blue_=0;
+	Green_=0;
+	Result_=0;
+}
 
 Color::Color(unsigned char Red, unsigned char Green, unsigned char Blue)
 {
@@ -14,6 +21,7 @@ Uint32 Color::GetUint32()
 {
 	return Result_;
 }
+
 void Color::SetNewRed(const unsigned char& count)
 {
 	Red_=count;
@@ -25,11 +33,13 @@ void Color::SetNewGreen(const unsigned char& count)
 	Green_=count;
 	Result_ = Result_ -((Result_%65536)/256)*256 +count*256;
 }
+
 void Color::SetNewBlue(const unsigned char& count)
 {
 	Blue_=count;
 	Result_ = Result_ -Result_%256 +count;
 }
+
 void Color::SetNewColor(const unsigned char& Red, const unsigned char& Green, const unsigned char& Blue)
 {
 	Red_ = Red;
@@ -38,10 +48,9 @@ void Color::SetNewColor(const unsigned char& Red, const unsigned char& Green, co
 	Result_ = Red*65536 + Green*256 + Blue;
 }
 
-Color& Color::operator*(float c)
+Color Color::operator*(float c)
 {
 	Color temp(0,0,0);
-
 	if(Red_*c<255) temp.Red_=Red_*c;
 	else temp.Red_ = 255;
 	if(Green_*c<255) temp.Green_=Green_*c;

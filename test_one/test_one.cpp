@@ -17,7 +17,9 @@ void DrawSphere(SDL_Surface* screen, Sphere s, int width, int height, LightSourc
 {
 	for (int x=0;x<width;x++) for (int y=0;y<height;y++)
 	{
-		Vector sol = s.Solution(Vector(x-width/2,1000,y-height/2),Vector(0,0,0));
+		if (x>width/2+70) if (y>height/2+20) 
+			s=s;
+		Vector sol = Solution(Vector(x-width/2,1000,y-height/2),Vector(0,0,0),s);
 		if (sol!=Vector(0,0,0))
 		{
 			Color c1=s.color_;
@@ -33,7 +35,7 @@ void SmartDrawSphere(SDL_Surface* screen, LightSource light, Sphere S, int width
 	for (int y=S.center_.z_-S.r_;y<=S.center_.z_+S.r_;++y)
 		for (int x=-(int)sqrt(S.r_*S.r_-(y-S.center_.x_)*(y-S.center_.x_))-1;x<(int)sqrt(S.r_*S.r_-(y-S.center_.x_)*(y-S.center_.x_))+1;++x)
 		{
-			Vector sol = S.Solution(Vector(x*5,1000,y*5),Vector(0,0,0));
+			Vector sol = Solution(Vector(x*5,1000,y*5),Vector(0,0,0),S);
 		if (sol!=Vector(0,0,0))
 		{
 			Color c1=S.color_;
@@ -88,9 +90,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Sphere s1 = Sphere(Vector(0,200,0),Color(255,0,0),20);
 	SDL_Surface* screen = enableScreen(1024,600,24);
-	LightSource light(70,-70,0,20000);
+	LightSource light(150,50,0,20000);
 	DrawSphere(screen,s1,1024,600,light);
 	//SmartDrawSphere(screen,light,s1,1024,600);
+	float a = Skalar(s1.center_,s1.center_);
+	int b = Long(s1.center_);
 	while (true) 
 		{
 			SDL_Event keyEvent ; SDL_PollEvent(&keyEvent);

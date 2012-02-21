@@ -9,7 +9,8 @@ public:
 	Color color_;
 	Sphere(float x, float y, float z, float r, Color color);
 	Sphere(Vector center, Color color, float r);
-	Vector Solution(Vector v, Vector source);
+	//Vector Solution(Vector v, Vector source);
 };
 
 Color Shadow(const LightSource& light, const Vector& dotonsphere, Sphere sp);
+Vector Solution(Vector v, Vector source, Sphere s);

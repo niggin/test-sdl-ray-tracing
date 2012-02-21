@@ -5,10 +5,10 @@ public:
 	float x_;
 	float y_;
 	float z_;
-	Vector() {};
+	Vector();
 	Vector(float x, float y, float z);
-	float Long();
-	float Skalar(const Vector& v1, const Vector& v2);
+	//float Long();
+	//float Skalar(const Vector& v1, const Vector& v2);
 	Vector Vectorn(const Vector& v1, const Vector& v2);
 	Vector operator+(const Vector& v) const;
 	Vector operator-(const Vector& v) const;
@@ -16,6 +16,9 @@ public:
 	bool operator!=(const Vector& v) const;
 	bool operator==(const Vector& v) const;
 	friend class Sphere;
+	friend class LightSource;
+	friend float Long(const Vector& v);
+	friend float Skalar(const Vector& v1, const Vector& v2);
 };
 
 class LightSource : public Vector
@@ -24,4 +27,7 @@ public:
 	float density_;
 	LightSource(float x,float y,float z,float density);
 };
+
+float Long(const Vector& v);
+float Skalar(const Vector& v1, const Vector& v2);
 
